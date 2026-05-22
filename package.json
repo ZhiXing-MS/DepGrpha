@@ -1,0 +1,69 @@
+{
+  "name": "depgraph-vscode",
+  "displayName": "DepGraph",
+  "description": "VS Code dependency graph with an agent-friendly CLI and expandable graph UI.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZhiXing-MS/DepGrpha.git"
+  },
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:depgraph.openGraph",
+    "onCommand:depgraph.refreshGraph",
+    "onView:depgraph.sidebar"
+  ],
+  "main": "./src/extension.js",
+  "bin": {
+    "depgraph": "./bin/depgraph.js"
+  },
+  "scripts": {
+    "test:cli": "node ./bin/depgraph.js analyze . --pretty",
+    "package:vsix": "vsce package"
+  },
+  "dependencies": {
+    "madge": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.89.0",
+    "@vscode/vsce": "^3.6.2"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "depgraph.openGraph",
+        "title": "DepGraph: Open Graph"
+      },
+      {
+        "command": "depgraph.refreshGraph",
+        "title": "DepGraph: Refresh Graph"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "depgraph",
+          "title": "DepGraph",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "depgraph": [
+        {
+          "type": "webview",
+          "id": "depgraph.sidebar",
+          "name": "Project Graph"
+        }
+      ]
+    }
+  }
+}
